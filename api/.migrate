@@ -1,0 +1,9 @@
+{
+  "lastRun": "1699538640608-create-shortened-url-collection.js",
+  "migrations": [
+    {
+      "title": "1699538640608-create-shortened-url-collection.js",
+      "timestamp": 1699541988263
+    }
+  ]
+}
