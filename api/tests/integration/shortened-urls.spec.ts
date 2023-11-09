@@ -6,7 +6,6 @@ describe('shortened-urls', () => {
       })
 
       const data = await response.json();
-      console.log(data)
       data.forEach(({ shortenedUrl }) => {
         expect(shortenedUrl).toEqual(expect.stringMatching(/https?:\/\/.*/))
       })

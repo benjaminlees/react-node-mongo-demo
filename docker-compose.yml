@@ -12,6 +12,18 @@ services:
     depends_on:
       - mongodb
 
+  webapp:
+    restart: always
+    build: ./webapp
+    command: npm run dev
+    volumes:
+      - ./webapp:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api 
+
   mongodb:
     image: mongo:latest
     environment:
