@@ -28,8 +28,12 @@ app.post('/shorten-url', async (req: Request, res: Response) => {
     shortenedUrl: `https://pbid.io/${randomEightCharString}`
   }
 
-  // Insert the defined document into the "shortenedUrl" collection
-  const result = await urls.insertOne(doc);
+  // Insert the defined document into the "shortenedUrl" collection and return updated document
+  const result = await urls.findOneAndUpdate(
+    { _id: new ObjectId() },
+    { $setOnInsert: doc },
+    { upsert: true, returnDocument: 'after' }
+  );
   res.send(result);
 });
 

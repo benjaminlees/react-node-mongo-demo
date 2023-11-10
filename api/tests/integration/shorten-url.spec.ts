@@ -13,7 +13,11 @@ describe('shorten-url', () => {
 
       const data = await response.json();
 
-      expect(data).toEqual({ acknowledged: true, insertedId: expect.stringMatching(/^[0-9a-fA-F]{24}$/)});
+      expect(data).toEqual({
+        _id: expect.stringMatching(/^[0-9a-fA-F]{24}$/),
+        originalUrl: expect.stringMatching(/https?:\/\/.*/),
+        shortenedUrl: expect.stringMatching(/https?:\/\/.*/)
+      });
     })
     it('should error if url is not provided', async () => {
       const response = await fetch('http://localhost:3000/shorten-url', {
@@ -30,7 +34,7 @@ describe('shorten-url', () => {
   describe('DELETE /shorten-url', () => {
     it('should delete a shortened url', async () => {
       const testUrl = 'https://testing/123';
-      await fetch('http://localhost:3000/shorten-url', {
+      const postResponse = await fetch('http://localhost:3000/shorten-url', {
         method: 'post',
         headers: {
           "Content-Type": "application/json",
@@ -39,12 +43,8 @@ describe('shorten-url', () => {
           url: testUrl
         })
       })
-      const getData = await(await fetch('http://localhost:3000/shortened-urls', {
-        method: 'get'
-      })).json()
-      const testData = getData.find(({ originalUrl }) => originalUrl === testUrl);
-      expect(testData).toBeDefined();
-      const deleteData = await (await fetch(`http://localhost:3000/shorten-url/${testData?._id}`, {
+      const postData = await postResponse.json();
+      const deleteData = await (await fetch(`http://localhost:3000/shorten-url/${postData?._id}`, {
         method: 'delete',
       })).json()
       expect(deleteData).toEqual({ acknowledged: true, deletedCount: 1 });
