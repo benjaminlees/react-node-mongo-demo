@@ -9,8 +9,9 @@ function UrlList() {
     axios.get(`${import.meta.env.VITE_API_URL}/shortened-urls`)
       .then((response) => {
         setUrls(response.data)
+        console.log(response)
       })
-  }, [])
+  }, [setUrls])
   return (
     <div className='url-list-container'>
       <ul>

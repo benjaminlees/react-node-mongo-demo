@@ -1,5 +1,5 @@
 export type ShortendUrlSchema = {
-  orginalUrl: String,
+  orginalUrl: string,
   shortenedUrl: string,
   _id: string
 }

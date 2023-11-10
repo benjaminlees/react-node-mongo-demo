@@ -14,7 +14,7 @@ function Form() {
   } = useForm();
   const {addToUrls} = useContext(UrlsContext)
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: { url: string }) => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/shorten-url`, data)
       addToUrls(response.data)
@@ -27,7 +27,7 @@ function Form() {
   }
 
   return (
-    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+    <form onSubmit={handleSubmit((data) => onSubmit({ url: data?.url }))}>
       <label htmlFor="url">Enter an https:// URL:</label>
       <input className={errors?.url && 'input--error'} type="url" id="url" {...register('url', { required: true})} />
       <button type="submit">Shorten URL</button>
