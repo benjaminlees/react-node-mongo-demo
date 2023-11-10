@@ -16,7 +16,7 @@ function Form() {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await axios.post('http://localhost:3000/shorten-url', data)
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/shorten-url`, data)
       addToUrls(response.data)
     } catch (e) {
       setError('singleErrorInput', {

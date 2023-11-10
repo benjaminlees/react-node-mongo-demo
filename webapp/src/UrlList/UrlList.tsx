@@ -6,7 +6,7 @@ import { UrlsContext } from '../context'
 function UrlList() {
   const {urls, setUrls} = useContext(UrlsContext)
   useEffect(() => {
-    axios.get('http://localhost:3000/shortened-urls')
+    axios.get(`${import.meta.env.VITE_API_URL}/shortened-urls`)
       .then((response) => {
         setUrls(response.data)
       })
