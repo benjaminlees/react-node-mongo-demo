@@ -10,3 +10,7 @@ This application is run using [Docker compose](https://docs.docker.com/compose/)
 * `docker-compose up` - go back to the root folder and run docker-compose.
 
 ## Testing
+
+To run the integration tests on the API make sure that the docker-compose is running and run `npm run test:integration`. To run the unit tests for the webapp just run `npm run test`.
+
+Unfortunately we are missing a lot of unit tests due to some time restrictions.
