@@ -22,7 +22,7 @@ describe('shortened-urls', () => {
       })
 
       const data = await response.json();
-      data.forEach(({ shortenedUrl }) => {
+      data.forEach(({ shortenedUrl }: { shortenedUrl: string }) => {
         expect(shortenedUrl).toEqual(expect.stringMatching(/https?:\/\/.*/))
       })
     })

@@ -9,6 +9,9 @@
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --fix --ext .ts src"
   },
+  "jest":{
+    "testEnvironment": "jsdom"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {

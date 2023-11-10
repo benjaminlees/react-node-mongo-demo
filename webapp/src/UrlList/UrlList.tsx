@@ -1,15 +1,16 @@
-import './UrlList.css'
 import { useEffect, useContext } from 'react'
+import './UrlList.css'
 import axios from 'axios'
 import { UrlsContext } from '../context'
+import { getEnv } from '../helper'
 
 function UrlList() {
   const {urls, setUrls} = useContext(UrlsContext)
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/shortened-urls`)
+    axios.get(`${getEnv('VITE_API_URL')}/shortened-urls`)
       .then((response) => {
+        console.log('data>>>', response.data)
         setUrls(response.data)
-        console.log(response)
       })
   }, [setUrls])
   return (
