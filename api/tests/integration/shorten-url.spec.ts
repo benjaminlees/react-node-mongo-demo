@@ -1,4 +1,9 @@
+import { removeTestUrls, testUrl } from "./helper";
+
 describe('shorten-url', () => {
+  afterAll(async () => {
+    await removeTestUrls()
+  })
   describe('POST /shorten-url', () => {
     it('should return a shortened url', async () => {
       const response = await fetch('http://localhost:3000/shorten-url', {
@@ -7,7 +12,7 @@ describe('shorten-url', () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          url: 'https://testing/124'
+          url: testUrl
         })
       })
 
@@ -33,7 +38,6 @@ describe('shorten-url', () => {
   })
   describe('DELETE /shorten-url', () => {
     it('should delete a shortened url', async () => {
-      const testUrl = 'https://testing/123';
       const postResponse = await fetch('http://localhost:3000/shorten-url', {
         method: 'post',
         headers: {
