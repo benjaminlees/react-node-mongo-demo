@@ -1,4 +1,9 @@
 .url-list-container {
   height: 250px;
+  width: 100%;
   overflow: scroll;
+}
+
+.url-list {
+  list-style-type: none;
 }

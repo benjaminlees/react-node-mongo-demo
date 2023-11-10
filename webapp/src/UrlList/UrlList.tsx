@@ -1,29 +1,20 @@
-import { useEffect, useState } from 'react'
 import './UrlList.css'
+import { useEffect, useContext } from 'react'
 import axios from 'axios'
-
-type ShortendUrlSchema = {
-  orginalUrl: String,
-  shortenedUrl: string,
-  _id: string
-}
+import { UrlsContext } from '../context'
 
 function UrlList() {
-  const [urls, setUrls] = useState<ShortendUrlSchema[]>([]);
-
+  const {urls, setUrls} = useContext(UrlsContext)
   useEffect(() => {
     axios.get('http://localhost:3000/shortened-urls')
       .then((response) => {
         setUrls(response.data)
-        console.log(response.data)
-
       })
-
   }, [])
   return (
     <div className='url-list-container'>
       <ul>
-        {urls.map((url: any) => {
+        {urls.map((url) => {
           return <li key={url._id}><a href={url.shortenedUrl}>{url.shortenedUrl}</a></li>
         })}
       </ul>
